@@ -1,9 +1,7 @@
 from random import randint
-import textwrap
 
 from racer import Racer
 from names import horse_names
-
 
 class Horse(Racer):
     def __init__(
@@ -33,5 +31,5 @@ class Horse(Racer):
         return "%s %s" % (forename, surname)
 
 if __name__ == "__main__":
-    h1 = Horse()
-    print(h1.print_stats())
+    h = Horse()
+    print(h.print_details())

@@ -34,8 +34,8 @@ rider_names = {
     'gendered': {
         # Male Forenames
         'male': [
-            "Alan",
-            "Bob",
+            "Adam",
+            "Brian",
             "Charles"
             ],
         # Female Forenames
@@ -58,3 +58,18 @@ rider_names = {
         "Chester",
         ]
     }
+
+track_names = {
+    'desc': [
+        "King's",
+        "Queen's",
+        "Whiteriver",
+    ],
+    'type': [
+        "Race",
+        "Sprint",
+        "Derby",
+        "Trials",
+        "Course"
+    ]
+}

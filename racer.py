@@ -49,7 +49,7 @@ class Racer(object):
         lost = races - first - second - third
         return [first, second, third, lost]
 
-    def print_stats(self):
+    def print_details(self):
         str = textwrap.dedent("""        {self.name}
         {self.sex_str}  {self.age}
         {self.stat1_short}/{self.stat2_short}/{self.stat3_short}: {self.s1} / {self.s2} / {self.s3}

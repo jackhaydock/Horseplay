@@ -1,9 +1,7 @@
 from random import randint
-import textwrap
 
 from racer import Racer
 from names import rider_names
-
 
 class Rider(Racer):
     def __init__(
@@ -33,5 +31,5 @@ class Rider(Racer):
         return "%s %s" % (forename, surname)
 
 if __name__ == "__main__":
-    r1 = Rider()
-    print(r1.print_stats())
+    r = Rider()
+    print(r.print_details())

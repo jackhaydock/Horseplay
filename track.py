@@ -10,13 +10,11 @@ class Track():
         legs_per_lap=None,
         jumps_per_lap=None,
         laps=None,
-        num_racers=None,
     ):
         self.name = name if name else self.generate_name(track_names)
         self.laps = laps if laps else self.generate_laps()
         self.legs_per_lap = legs_per_lap if legs_per_lap else self.generate_legs_per_lap()
         self.jumps_per_lap = jumps_per_lap if jumps_per_lap else self.generate_jumps_per_lap()
-        self.num_racers = num_racers if num_racers else self.generate_num_racers()
 
     def generate_name(self, names):
         desc = names['desc'][randint(0, len(names['desc']) - 1)]
@@ -31,9 +29,6 @@ class Track():
 
     def generate_jumps_per_lap(self):
         return randint(0, self.legs_per_lap)
-
-    def generate_num_racers(self):
-        return randint(2,6)
 
     def print_details(self):
         str = textwrap.dedent("""        {self.name}

@@ -60,6 +60,10 @@ class Race():
             odds.append((sum(scores)/score))
         self.odds = odds
 
+    # TODO design properly
+    def start_race(self):
+        return randint(1, len(self.racers))
+
     def print_details(self):
         str = self.track.print_details()
         str += ("Racing Pairs: %d\n" % self.num_racers)
@@ -73,4 +77,4 @@ class Race():
 if __name__ == "__main__":
     r = Race()
     print(r.print_details())
-    r.calculate_odds()
+    print(r.start_race())

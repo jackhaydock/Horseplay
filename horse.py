@@ -1,7 +1,10 @@
+import names
 from random import randint
 
 from racer import Racer
-from names import horse_names
+from adjectives import adjectives
+from adverbs import adverbs
+from nouns import nouns
 
 class Horse(Racer):
     def __init__(
@@ -27,8 +30,22 @@ class Horse(Racer):
         return randint(2,11)
 
     def generate_name(self):
-        surname, forename = self.generate_names(horse_names)
-        return "%s %s" % (forename, surname)
+        full_name = ""
+
+        # Adverb
+        if randint(0,10) == 0:
+            full_name += "%s " % adverbs[randint(0,len(adverbs))].strip().title()
+
+        # Adjective
+        full_name += "%s " % adjectives[randint(0,len(adjectives))].title()
+
+        # Name/Noun
+        if randint(0,1) == 0:
+            full_name += names.get_first_name(gender=self.sex_str)
+        else:
+            full_name += "%s " % nouns[randint(0,len(nouns))].title()
+
+        return full_name
 
 if __name__ == "__main__":
     h = Horse()

@@ -1,7 +1,7 @@
 from random import randint
+import names
 
 from racer import Racer
-from names import rider_names
 
 class Rider(Racer):
     def __init__(
@@ -24,11 +24,13 @@ class Rider(Racer):
         self.stat3_long, self.stat3_short = "", ""
 
     def generate_age(self):
-        return randint(20,60)
+        return randint(18,55)
 
     def generate_name(self):
-        forename, surname = self.generate_names(rider_names)
-        return "%s %s" % (forename, surname)
+        name = names.get_full_name(gender=self.sex_str)
+        if randint(0,20) == 0:
+            name += " Jr."
+        return name
 
 if __name__ == "__main__":
     r = Rider()

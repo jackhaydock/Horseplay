@@ -1,8 +1,8 @@
-from random import randint
+from random import randint, shuffle
 import textwrap
+from tabulate import tabulate
 
-from horse import Horse
-from rider import Rider
+from pair import Racing_Pair
 from track import Track
 
 class Race():
@@ -24,54 +24,50 @@ class Race():
         racers = []
         i = 0
         while i < num_racers:
-            racers.append((Rider(), Horse()))
+            racers.append(Racing_Pair(i + 1))
             i += 1
         return racers
 
     def calculate_odds(self):
-        scores = []
-        for rider,horse in self.racers:
-            score = 0
-
-            score += rider.s1 * 5 # Control of Rider
-            score += rider.s2 * 5
-            score += rider.s3 * 5
-
-            score += rider.career[0] * 5 # Rider's 1st place wins
-            score += rider.career[1] * 4 # Rider's 2nd place wins
-            score += rider.career[2] * 3 # Rider's 3rd place wins
-            score -= rider.career[3] * 2 # Rider's Loses
-
-
-            score += horse.s1 * 5 # Speed of Horse
-            score += horse.s2 * (self.track.legs_per_lap * self.track.laps) # Stamina of Horse
-            score += horse.s3 * (self.track.jumps_per_lap * self.track.laps) # Jumping ability of Horse
-
-            score += horse.career[0] * 5 # Horse's 1st place wins
-            score += horse.career[1] * 4 # Horse's 2nd place wins
-            score += horse.career[2] * 3 # Horse's 3rd place wins
-            score -= horse.career[3] * 2 # Horse's Loses
-
-            score += randint(-100, 100) # Bookie error
-            scores.append(score)
-
-        odds = []
-        for score in scores:
-            odds.append((sum(scores)/score))
-        self.odds = odds
+        total_score = 0
+        for pair in self.racers:
+            pair.calculate_score(self.track)
+            total_score += pair.score
+        for pair in self.racers:
+            pair.odds = total_score / pair.score
 
     # TODO design properly
     def start_race(self):
-        return randint(1, len(self.racers))
+        positions = self.racers[:]
+        shuffle(positions)
+        return positions
 
     def print_details(self):
-        str = self.track.print_details()
-        str += ("Racing Pairs: %d\n" % self.num_racers)
-        for i, pair in enumerate(self.racers):
-            str += ("\n---#%d---(%d/1)" % (int(i) + 1, self.odds[i]))
-            for racer in pair:
-                str += "\n"
-                str += (racer.print_details())
+        str = self.track.name
+        str += "\n"
+        str += tabulate(self.track.print_details(), tablefmt="plain")
+        str += ("\nRacing Pairs: %d\n" % self.num_racers)
+
+        table = [
+            [
+            # self.number,
+            "",
+            "Name",
+            "Age",
+            "Sex",
+            "{}/{}".format(self.racers[0].rider.stat1_short, self.racers[0].horse.stat1_short),
+            "{}/{}".format(self.racers[0].rider.stat2_short, self.racers[0].horse.stat2_short),
+            "{}/{}".format(self.racers[0].rider.stat3_short, self.racers[0].horse.stat3_short),
+            "1st",
+            "2nd",
+            "3rd",
+            "Lost",
+            "Odds",
+            ]
+        ]
+        for pair in self.racers:
+            table += pair.print_details()
+        str += tabulate(table)
         return str
 
 if __name__ == "__main__":

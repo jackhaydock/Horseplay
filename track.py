@@ -1,7 +1,7 @@
 from random import randint
 import textwrap
 
-from names import track_names
+from track_names import track_names
 
 class Track():
     def __init__(
@@ -31,12 +31,29 @@ class Track():
         return randint(0, self.legs_per_lap)
 
     def print_details(self):
-        str = textwrap.dedent("""        {self.name}
-        Laps: {self.laps}
-        Legs per lap: {self.legs_per_lap}
-        Jumps per lap: {self.jumps_per_lap}
-        """.format(self=self))
-        return str
+        # str = textwrap.dedent("""        {self.name}
+        # Laps: {self.laps}
+        # Legs per lap: {self.legs_per_lap}
+        # Jumps per lap: {self.jumps_per_lap}
+        # """.format(self=self))
+        table = [
+            [
+            "Laps",
+            "Legs/Lap",
+            "Jumps/Lap",
+            "Total Legs",
+            "Total Jumps"
+            ],
+            [
+            self.laps,
+            self.legs_per_lap,
+            self.jumps_per_lap,
+            self.legs_per_lap * self.laps,
+            self.jumps_per_lap * self.laps,
+            ]
+        ]
+
+        return table
 
 if __name__ == "__main__":
     t = Track()

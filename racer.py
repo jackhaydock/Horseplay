@@ -1,5 +1,6 @@
 from random import randint
 import textwrap
+import tabulate
 
 class Racer(object):
 
@@ -22,19 +23,6 @@ class Racer(object):
         sex = randint(0,1)
         return sex
 
-    def generate_names(self, names):
-        x = randint(0,1)
-        if x == 0:
-            # Gendered name
-            gendered = names['gendered'][self.sex_str]
-        else:
-            # Unisex name
-            gendered = names['gendered']['unisex']
-
-        gendered = gendered[randint(0, len(gendered) - 1)]
-        non_gendered = names['non_gendered'][randint(0, len(names['non_gendered']) - 1)]
-        return gendered, non_gendered
-
     def generate_stats(self, points=100):
         s1 = randint(0, points)
         s2 = randint(0, points - s1)
@@ -48,11 +36,3 @@ class Racer(object):
         third = randint(0, races - first - second)
         lost = races - first - second - third
         return [first, second, third, lost]
-
-    def print_details(self):
-        str = textwrap.dedent("""        {self.name}
-        {self.sex_str}  {self.age}
-        {self.stat1_short}/{self.stat2_short}/{self.stat3_short}: {self.s1} / {self.s2} / {self.s3}
-        1st/2nd/3rd/Lost: {self.career[0]} / {self.career[1]} / {self.career[2]} / {self.career[3]}
-        """.format(self=self))
-        return str

@@ -19,9 +19,9 @@ class Rider(Racer):
             stats=stats,
             career=career
         )
-        self.stat1_long, self.stat1_short = "Control", "CTL"
-        self.stat2_long, self.stat2_short = "", ""
-        self.stat3_long, self.stat3_short = "", ""
+        self.stat1_long, self.stat1_short = "Whipping", "WHP" # Increase initial speed
+        self.stat2_long, self.stat2_short = "Stamina", "STM" # Reduce loss of speed from legs
+        self.stat3_long, self.stat3_short = "Control", "CTL" # Reduce loss of speed from jumps
 
     def generate_age(self):
         return randint(18,55)

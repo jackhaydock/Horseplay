@@ -22,9 +22,9 @@ class Horse(Racer):
             stats=stats,
             career=career
         )
-        self.stat1_long, self.stat1_short = "Speed", "SPD"
-        self.stat2_long, self.stat2_short = "Stamina", "STM"
-        self.stat3_long, self.stat3_short = "Jumping", "JMP"
+        self.stat1_long, self.stat1_short = "Speed", "SPD" # Increase initial speed
+        self.stat2_long, self.stat2_short = "Stamina", "STM" # Reduce loss of speed from legs
+        self.stat3_long, self.stat3_short = "Jumping", "JMP" # Reduce loss of speed from jumps
 
     def generate_age(self):
         return randint(2,11)

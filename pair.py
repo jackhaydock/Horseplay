@@ -17,28 +17,28 @@ class Racing_Pair(object):
         # self.calculate_score()
 
     def calculate_score(self, track):
-        score = 0
+        odds_score = 0
 
-        score += self.rider.s1 * 5 # Control of Rider
-        score += self.rider.s2 * 5
-        score += self.rider.s3 * 5
+        odds_score += self.rider.s1 * 5 # Control of Rider
+        odds_score += self.rider.s2 * 5
+        odds_score += self.rider.s3 * 5
 
-        score += self.rider.career[0] * 10 # Rider's 1st place wins
-        score += self.rider.career[1] * 5 # Rider's 2nd place wins
-        score += self.rider.career[2] * 1 # Rider's 3rd place wins
-        score -= self.rider.career[3] * 5 # Rider's Loses
+        odds_score += self.rider.career[0] * 10 # Rider's 1st place wins
+        odds_score += self.rider.career[1] * 5 # Rider's 2nd place wins
+        odds_score += self.rider.career[2] * 1 # Rider's 3rd place wins
+        odds_score -= self.rider.career[3] * 5 # Rider's Loses
 
-        score += self.horse.s1 * 5 # Speed of Horse
-        score += self.horse.s2 * (track.legs_per_lap * track.laps) # Stamina of Horse
-        score += self.horse.s3 * (track.jumps_per_lap * track.laps) # Jumping ability of Horse
+        odds_score += self.horse.s1 * 5 # Speed of Horse
+        odds_score += self.horse.s2 * (track.legs_per_lap * track.laps) # Stamina of Horse
+        odds_score += self.horse.s3 * (track.jumps_per_lap * track.laps) # Jumping ability of Horse
 
-        score += self.horse.career[0] * 10 # Horse's 1st place wins
-        score += self.horse.career[1] * 5 # Horse's 2nd place wins
-        score += self.horse.career[2] * 1 # Horse's 3rd place wins
-        score -= self.horse.career[3] * 5 # Horse's Loses
+        odds_score += self.horse.career[0] * 10 # Horse's 1st place wins
+        odds_score += self.horse.career[1] * 5 # Horse's 2nd place wins
+        odds_score += self.horse.career[2] * 1 # Horse's 3rd place wins
+        odds_score -= self.horse.career[3] * 5 # Horse's Loses
 
-        score += randint(-200, 200) # Bookie error
-        self.score = score
+        odds_score += randint(-200, 200) # Bookie error
+        self.odds_score = odds_score
 
     def print_details(self):
         table = [

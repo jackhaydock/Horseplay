@@ -31,11 +31,6 @@ class Track():
         return randint(0, self.legs_per_lap)
 
     def print_details(self):
-        # str = textwrap.dedent("""        {self.name}
-        # Laps: {self.laps}
-        # Legs per lap: {self.legs_per_lap}
-        # Jumps per lap: {self.jumps_per_lap}
-        # """.format(self=self))
         table = [
             [
             "Laps",
@@ -52,7 +47,6 @@ class Track():
             self.jumps_per_lap * self.laps,
             ]
         ]
-
         return table
 
 if __name__ == "__main__":

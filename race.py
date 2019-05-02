@@ -32,14 +32,55 @@ class Race():
         total_score = 0
         for pair in self.racers:
             pair.calculate_score(self.track)
-            total_score += pair.score
+            total_score += pair.odds_score
         for pair in self.racers:
-            pair.odds = total_score / pair.score
+            pair.odds = total_score / pair.odds_score
 
-    # TODO design properly
     def start_race(self):
+
+        # Define initial score at begining of race
         positions = self.racers[:]
-        shuffle(positions)
+        for pair in positions:
+             pair.race_score = (pair.horse.s1 * 10) + (pair.rider.s1 * 10)
+
+        # Define each lap of track
+        lap_design = []
+        for i in range(self.track.legs_per_lap):
+            lap_design.append(0)
+        for i in range(self.track.jumps_per_lap):
+            lap_design.append(1)
+        shuffle(lap_design)
+
+        positions.sort(key=lambda x: x.race_score, reverse=True)
+        race_summary =[[""],[""]]
+        for x,y in enumerate(positions):
+            race_summary[0].append(x)
+            race_summary[1].append("#{} ({})".format(y.number, y.race_score))
+
+        # Begin Race
+        for i, lap in enumerate(range(self.track.laps)):
+            race_summary.append(['Lap {}'.format(i+1)])
+            for part in lap_design:
+
+                if part == 0: # Leg
+                    part_summary = ["Leg"]
+                    for pair in positions:
+                        pair.race_score -= randint(200,400) # Loss of speed from leg
+                        pair.race_score += pair.horse.s2 + pair.rider.s2 # Counter to above
+
+                        part_summary.append("#{} ({})".format(pair.number, pair.race_score))
+
+                elif part == 1: # Jump
+                    part_summary = ["Jump"]
+                    for pair in positions:
+                        pair.race_score -= randint(200,400) # Loss of speed from jump
+                        pair.race_score += pair.horse.s3 + pair.rider.s3 # Counter to above
+                        part_summary.append("#{} ({})".format(pair.number, pair.race_score))
+
+                positions.sort(key=lambda x: x.race_score, reverse=True)
+                race_summary += [part_summary]
+
+        print(tabulate(race_summary))
         return positions
 
     def print_details(self):

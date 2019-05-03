@@ -54,7 +54,7 @@ class Race():
         positions.sort(key=lambda x: x.race_score, reverse=True)
         race_summary =[[""],[""]]
         for x,y in enumerate(positions):
-            race_summary[0].append(x)
+            race_summary[0].append(x+1)
             race_summary[1].append("#{} ({})".format(y.number, y.race_score))
 
         # Begin Race

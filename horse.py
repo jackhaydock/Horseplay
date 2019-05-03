@@ -34,10 +34,10 @@ class Horse(Racer):
 
         # Adverb
         if randint(0,10) == 0:
-            full_name += "%s " % adverbs[randint(0,len(adverbs))].strip().title()
+            full_name += "%s " % adverbs[randint(0,len(adverbs)-1)].strip().title()
 
         # Adjective
-        full_name += "%s " % adjectives[randint(0,len(adjectives))].title()
+        full_name += "%s " % adjectives[randint(0,len(adjectives)-1)].title()
 
         # Name/Noun
         if randint(0,1) == 0:

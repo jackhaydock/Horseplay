@@ -34,7 +34,7 @@ class Race():
             pair.calculate_score(self.track)
             total_score += pair.odds_score
         for pair in self.racers:
-            pair.odds = total_score / pair.odds_score
+            pair.odds = round( (float(total_score) / float(pair.odds_score)), 1)
 
     def start_race(self):
 
@@ -80,17 +80,18 @@ class Race():
                 positions.sort(key=lambda x: x.race_score, reverse=True)
                 race_summary += [part_summary]
 
-        print(tabulate(race_summary))
+        print(tabulate(race_summary, headers="firstrow"))
         return positions
 
     def print_details(self):
-        str = tabulate(self.track.print_details(), tablefmt="plain")
-        str += "\n"
+        str = tabulate(self.track.print_details(), headers="firstrow")
+        str += "\n\n"
 
         table = [
             [
             # self.number,
             "",
+            "Odds",
             "Name",
             "Age",
             "Sex",
@@ -106,7 +107,7 @@ class Race():
         ]
         for pair in self.racers:
             table += pair.print_details()
-        str += tabulate(table)
+        str += tabulate(table, headers="firstrow")
         return str
 
 if __name__ == "__main__":

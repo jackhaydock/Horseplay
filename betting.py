@@ -1,8 +1,8 @@
 from race import Race
 
 def start_betting(purse):
-    print("------------------------")
     race = Race()
+    print("")
     print(race.print_details())
 
     # Get Player's Pair
@@ -32,6 +32,11 @@ def start_betting(purse):
 
     # Begin Race
     print("You have bet %d on #%d (%s riden by %s)" % (player_bet, racer_num, race.racers[racer_num -1].horse.name, race.racers[racer_num -1].rider.name))
+    pot = int(race.racers[racer_num -1].odds * player_bet)
+    print("Your potential winnings are: {}".format(pot))
+
+    # Begin Race
+    raw_input("Press enter to start race")
     winners = race.start_race()
     positions = [r.number for r in winners]
 
@@ -39,17 +44,17 @@ def start_betting(purse):
 
     # Calculate Player's Winnings
     if racer_num == positions[0]:
-        winnings = race.racers[racer_num -1].odds * player_bet
+        winnings = pot
         print("Congratulations You Win!")
-        print("You earned %d times your bet: %d" % (race.racers[racer_num -1].odds, winnings))
+        print("You earned: {}".format(winnings))
     elif racer_num == positions[1]:
-        winnings = player_bet
+        winnings = pot / 2
         print("You came second!")
-        print("You earned your money back: %d" % (winnings))
+        print("You earned half your potential winnings: {}".format(winnings))
     elif racer_num == positions[2]:
-        winnings = player_bet / 2
+        winnings = player_bet
         print("You Came Third!")
-        print("You earned half your money back: %d" % (winnings))
+        print("You earned your money back: {}".format(winnings))
     else:
         winnings = 0
         print("You Lost!")
@@ -58,9 +63,10 @@ def start_betting(purse):
     print("Current Purse: {}".format(purse))
     return purse
 
+# Loop until player runs out of money
 purse = 1000
 while purse > 0:
-    raw_input("Press enter to start next race")
+    raw_input("Press enter to find next race")
     x = start_betting(purse)
     purse = x
 else:

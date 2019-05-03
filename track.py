@@ -33,6 +33,7 @@ class Track():
     def print_details(self):
         table = [
             [
+            "",
             "Laps",
             "Legs/Lap",
             "Jumps/Lap",
@@ -40,6 +41,7 @@ class Track():
             "Total Jumps"
             ],
             [
+            self.name,
             self.laps,
             self.legs_per_lap,
             self.jumps_per_lap,

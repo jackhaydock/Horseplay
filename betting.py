@@ -1,6 +1,7 @@
 from race import Race
 
 def start_betting(purse):
+    print("------------------------")
     race = Race()
     print(race.print_details())
 
@@ -58,7 +59,9 @@ def start_betting(purse):
     return purse
 
 purse = 1000
-while True:
+while purse > 0:
+    raw_input("Press enter to start next race")
     x = start_betting(purse)
     purse = x
-    raw_input("Press enter to start next race")
+else:
+    print("You have lost all your money!")

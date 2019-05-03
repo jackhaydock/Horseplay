@@ -84,10 +84,8 @@ class Race():
         return positions
 
     def print_details(self):
-        str = self.track.name
+        str = tabulate(self.track.print_details(), tablefmt="plain")
         str += "\n"
-        str += tabulate(self.track.print_details(), tablefmt="plain")
-        str += ("\nRacing Pairs: %d\n" % self.num_racers)
 
         table = [
             [
